@@ -24,6 +24,7 @@ export class FileService {
         const currentFileData = await this.filesRepository.findOne({ id: Number(fileIdForUpdate) });
 
         if (!currentFileData) {
+            await this.deleteFileInFolder(file.filename);
             throw new HttpException(`The file does not exist`, HttpStatus.BAD_REQUEST);
         }
 
